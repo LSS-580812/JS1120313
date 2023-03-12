@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type='text/css'>
+    
+  </style>
+</head>
+
+
+<body>
+  <h3>題目：2021 年全球晶圓代工市率-動態生成表格</h3>
+  <table width="60%" border="1" cellspacing="0">
+    <thead>
+      <tr>
+        <th>排名</th>
+        <th>公司</th>
+        <th>國別</th>
+        <th>市佔率%</th>
+      </tr>
+    </thead>
+    <tbody id="data-output">
+      <!-- JavaScript -->
+    </tbody>
+  </table>
+
+  <script>
+    fetch("1120313.json")
+    .then(function(response){
+    return response.json();
+    })
+    .then(function(products){
+    let placeholder = document.querySelector("#data-output");
+    let out = "";
+    for(let product of products){
+      out += `
+        <tr>
+          <td>${product.Ranking}</td>
+          <td>${product.Company}</td>
+          <td>${product.Country}</td>
+          <td>${product.Ratio}</td>
+        </tr>
+      `;
+    }
+    placeholder.innerHTML = out;
+    });
+  </script>
+</body>
+
+</html>
